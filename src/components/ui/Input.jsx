@@ -1,36 +1,26 @@
 // src/components/ui/Input.jsx
 const Input = ({ 
-    label, 
-    error, 
-    helperText,
-    className = '',
+    icon: Icon, 
+    className = '', 
     ...props 
   }) => {
     return (
-      <div className="space-y-2">
-        {label && (
-          <label className="block text-sm font-medium text-gray-700">
-            {label}
-          </label>
+      <div className="relative">
+        {Icon && (
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Icon size={16} className="text-gray-400" />
+          </div>
         )}
         <input
           className={`
-            w-full px-3 py-2.5 border rounded-lg shadow-sm
-            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-            transition-all duration-200
-            placeholder:text-gray-400
-            ${error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
-            disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50
+            w-full px-3 py-2 border border-gray-300 rounded-lg
+            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+            placeholder-gray-400
+            ${Icon ? 'pl-10' : 'pl-3'}
             ${className}
           `}
           {...props}
         />
-        {error && (
-          <p className="text-sm text-red-600">{error}</p>
-        )}
-        {helperText && !error && (
-          <p className="text-sm text-gray-500">{helperText}</p>
-        )}
       </div>
     );
   };

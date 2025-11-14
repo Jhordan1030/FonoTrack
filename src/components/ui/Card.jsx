@@ -1,4 +1,3 @@
-// src/components/ui/Card.jsx
 const Card = ({ children, className = '', hover = false }) => {
     return (
       <div className={`

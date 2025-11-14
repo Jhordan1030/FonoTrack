@@ -1,11 +1,9 @@
-// src/components/layout/Header.jsx
 import { Bell, User, Menu } from 'lucide-react';
 
 const Header = ({ onMenuToggle }) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
       <div className="flex items-center justify-between px-6 py-4">
-        {/* Logo y título */}
         <div className="flex items-center space-x-4">
           <button 
             onClick={onMenuToggle}
@@ -22,7 +20,6 @@ const Header = ({ onMenuToggle }) => {
           </div>
         </div>
 
-        {/* Acciones del usuario */}
         <div className="flex items-center space-x-4">
           <button className="p-2 text-gray-500 hover:text-gray-700 transition-colors relative">
             <Bell size={20} />

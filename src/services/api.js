@@ -1,17 +1,15 @@
-// src/services/api.js
 import axios from 'axios';
 
-// Configurar axios para conectar con tu backend
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://fonotrack.vercel.app/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000,
 });
 
-// Interceptor para manejar errores globalmente
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -20,7 +18,6 @@ api.interceptors.response.use(
   }
 );
 
-// Servicios para Pacientes
 export const patientsService = {
   getAll: () => api.get('/pacientes'),
   getById: (id) => api.get(`/pacientes/${id}`),
@@ -29,7 +26,6 @@ export const patientsService = {
   delete: (id) => api.delete(`/pacientes/${id}`),
 };
 
-// Servicios para Evaluaciones
 export const evaluationsService = {
   getAll: () => api.get('/evaluaciones'),
   getById: (id) => api.get(`/evaluaciones/${id}`),
@@ -39,7 +35,6 @@ export const evaluationsService = {
   delete: (id) => api.delete(`/evaluaciones/${id}`),
 };
 
-// Servicios para Documentos
 export const documentsService = {
   getAll: () => api.get('/documentos'),
   getByPatient: (patientId) => api.get(`/documentos/patient/${patientId}`),
@@ -47,17 +42,15 @@ export const documentsService = {
   delete: (id) => api.delete(`/documentos/${id}`),
 };
 
-// Servicios para Dashboard
 export const dashboardService = {
   getStats: () => api.get('/dashboard/stats'),
   getMonthlyStats: () => api.get('/dashboard/monthly-stats'),
 };
 
-// Servicios para Búsqueda
 export const searchService = {
   patients: (query, page = 1, limit = 10) => 
-    api.get(`/buscar/pacientes?q=${query}&page=${page}&limit=${limit}`),
-  global: (query) => api.get(`/buscar/global?q=${query}`),
+    api.get(`/buscar/pacientes?q=${encodeURIComponent(query)}&page=${page}&limit=${limit}`),
+  global: (query) => api.get(`/buscar/global?q=${encodeURIComponent(query)}`),
 };
 
 export default api;
